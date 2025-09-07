@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="test-persistence" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+
+        <class>in.lokeshkaushik.expensemanager.model.user.UserInfo</class>
+        <class>in.lokeshkaushik.expensemanager.model.user.FullName</class>
+        <class>in.lokeshkaushik.expensemanager.model.user.Address</class>
+        <properties>
+            <!-- Database connection -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:test.db"/>
+<!--            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>-->
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+
+            <!-- Hibernate settings -->
+            <!-- auto create schema and drop -->
+            <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+
+            <!-- Eclipse settings -->
+<!--            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>-->
+<!--            <property name="eclipselink.logging.level" value="FINE"/>-->
+
+        </properties>
+    </persistence-unit>
+</persistence>
