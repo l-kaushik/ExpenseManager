@@ -1,9 +1,8 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class BankBranch {
@@ -11,10 +10,13 @@ public class BankBranch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long branchId;
 
+    @OneToMany(mappedBy = "bankBranch")
+    List<Account> accounts;
+
     private String IFSCCode;
     private String branchCode;
     private String branchName;
-    // can add Address field for bank address, but I don't think there is need for it right now
+    // can add Address field for this branch, but I don't think there is need for it right now
 
     public long getBranchId() {
         return branchId;
@@ -46,5 +48,13 @@ public class BankBranch {
 
     public void setBranchName(String branchName) {
         this.branchName = branchName;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }
