@@ -1,9 +1,6 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,8 +11,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long transactionId;
 
-    // add sender account
-    // add receiver account
+    @ManyToOne
+    @JoinColumn(name = "sender_account_id")
+    private Account senderAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_account_id")
+    private Account receiverAccount;
 
     private TransactionType transactionType;
     private PaymentStatus paymentStatus;
@@ -78,5 +80,21 @@ public class Transaction {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Account getSenderAccount() {
+        return senderAccount;
+    }
+
+    public void setSenderAccount(Account senderAccount) {
+        this.senderAccount = senderAccount;
+    }
+
+    public Account getReceiverAccount() {
+        return receiverAccount;
+    }
+
+    public void setReceiverAccount(Account receiverAccount) {
+        this.receiverAccount = receiverAccount;
     }
 }

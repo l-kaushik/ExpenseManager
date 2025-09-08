@@ -21,6 +21,14 @@ public class Account {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    /*
+    NOTE: No bi-directional mapping to transaction,
+    cuz transaction can scale up to huge numbers and collection cause them loading all at once
+    might add better solution later or use plain sql query encapsulated in getter method
+
+    can use pagination like 0,100 records only etc...
+     */
+
     // TODO: bank balance will be calculated from transaction history, but add a way to setup initial amount
 
     public long getAccountId() {
