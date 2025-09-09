@@ -1,5 +1,6 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -11,10 +12,12 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long accountId;
 
-    // add user
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "branchId") // FK column in account table
+    @JoinColumn(name = "branch_id") // FK column in account table
     private BankBranch bankBranch;
 
     private long accountNumber;
@@ -69,5 +72,13 @@ public class Account {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

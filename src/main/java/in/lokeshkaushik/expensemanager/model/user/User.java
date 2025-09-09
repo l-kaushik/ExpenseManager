@@ -1,5 +1,6 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
+import in.lokeshkaushik.expensemanager.model.account.Account;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = false)
     private UserAuth userAuth;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Account account;
 
     private String username;
     private LocalDateTime createdAt;
@@ -56,5 +60,13 @@ public class User {
 
     public void setUserAuth(UserAuth userAuth) {
         this.userAuth = userAuth;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
