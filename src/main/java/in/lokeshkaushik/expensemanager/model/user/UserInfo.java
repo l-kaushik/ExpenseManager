@@ -13,6 +13,10 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userInfoId;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private FullName fullNameId;
 
@@ -51,5 +55,13 @@ public class UserInfo {
 
     public void setBrithDate(Date brithDate) {
         this.brithDate = brithDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

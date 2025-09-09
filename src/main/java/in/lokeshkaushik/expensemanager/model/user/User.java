@@ -18,6 +18,9 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Account account;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserInfo userInfo;
+
     private String username;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -68,5 +71,13 @@ public class User {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }
