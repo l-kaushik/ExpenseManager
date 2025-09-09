@@ -4,6 +4,7 @@ import in.lokeshkaushik.expensemanager.model.account.Account;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,9 +16,8 @@ public class User {
     @Column(nullable = false)
     private UserAuth userAuth;
 
-    // TODO: User can have multiple account
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Account account;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserInfo userInfo;
@@ -106,12 +106,12 @@ public class User {
         this.userAuth = userAuth;
     }
 
-    public Account getAccount() {
-        return account;
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public UserInfo getUserInfo() {
