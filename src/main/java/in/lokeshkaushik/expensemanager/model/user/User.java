@@ -15,6 +15,7 @@ public class User {
     @Column(nullable = false)
     private UserAuth userAuth;
 
+    // TODO: User can have multiple account
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Account account;
 
@@ -24,6 +25,46 @@ public class User {
     private String username;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    // Default Constructor
+    protected User(){}
+
+    // Builder
+    public static class Builder {
+        private final User user;
+
+        public Builder() {
+            this.user = new User();
+        }
+
+        public Builder username(String username){
+            user.setUsername(username);
+            return this;
+        }
+
+        public  Builder userAuth(UserAuth userAuth) {
+            user.setUserAuth(userAuth);
+            return this;
+        }
+
+        public Builder userInfo(UserInfo userInfo){
+            user.setUserInfo(userInfo);
+            return this;
+        }
+
+        public User build(){
+            user.setCreatedAt(LocalDateTime.now());
+            user.setUpdatedAt(LocalDateTime.now());
+            return user;
+        }
+
+    }
+
+    // Getters and Setters
+
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public long getUserId() {
         return userId;
