@@ -9,7 +9,7 @@ public class FullName{
     private long fullNameId;
 
     @OneToOne
-    @JoinColumn(name="userInfoId")
+    @JoinColumn(name="user_info_id", nullable = false)
     private UserInfo userInfo;
 
     private String firstName;

@@ -13,7 +13,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userInfoId;
 
-    @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private FullName fullNameId;
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
