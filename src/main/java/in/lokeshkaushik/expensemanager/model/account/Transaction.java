@@ -1,5 +1,6 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,6 +19,10 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "receiver_account_id")
     private Account receiverAccount;
+
+    @OneToOne
+    @JoinColumn(name = "expense_id")
+    private Expense expense;
 
     private TransactionType transactionType;
     private PaymentStatus paymentStatus;
@@ -96,5 +101,13 @@ public class Transaction {
 
     public void setReceiverAccount(Account receiverAccount) {
         this.receiverAccount = receiverAccount;
+    }
+
+    public Expense getExpense() {
+        return expense;
+    }
+
+    public void setExpense(Expense expense) {
+        this.expense = expense;
     }
 }

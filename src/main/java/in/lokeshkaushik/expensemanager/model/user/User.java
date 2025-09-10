@@ -1,6 +1,7 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
 import in.lokeshkaushik.expensemanager.model.account.Account;
+import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
+    // NOTE: Since its personal expense tracker, removing transaction entries won't matter that much,
+    // but if add support for shared transaction or syncing this online, then reconsider the orphan removal
+    // since removing 1 account will mess up entries for others as well.
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(nullable = false)
     private UserAuth userAuth;
@@ -21,6 +26,10 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserInfo userInfo;
+
+    // TODO: add cascading and orphan removal in service layer
+    @OneToMany(mappedBy = "user")
+    private List<Expense> expenses;
 
     private String username;
     private LocalDateTime createdAt;
@@ -120,5 +129,13 @@ public class User {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
     }
 }
