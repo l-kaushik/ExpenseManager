@@ -1,4 +1,4 @@
-package in.lokeshkaushik.expensemanager.model.dao;
+package in.lokeshkaushik.expensemanager.dao;
 
 import in.lokeshkaushik.expensemanager.utils.database.JPAUtil;
 import jakarta.persistence.EntityManager;
