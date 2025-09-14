@@ -29,18 +29,19 @@ public abstract class BaseJpaTest {
     void setUp() {
         entityManager = entityManagerFactory.createEntityManager();
         entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
     }
 
     @AfterEach
     void tearDown() {
+        if(entityTransaction.isActive()) entityTransaction.rollback();
         if(entityManager != null) entityManager.close();
     }
 
     protected<T extends Identifiable> T PersistAndFetch(Class<T> tClass, T entity) {
-        entityTransaction.begin();
         entityManager.persist(entity);
-        entityTransaction.commit();
-
+//        entityTransaction.commit();
+        entityManager.flush();  // force sql insert/update
         entityManager.clear(); // force fresh fetch
 
         return entityManager.find(tClass, entity.getId());
