@@ -60,7 +60,7 @@ public class TestDataFactory {
                 .fullName(createFullName())
                 .addresses(List.of(createAddress("123 street", "San Jose"),
                         createAddress("234 street", "San Francisco")))
-                .brithDate(new Date())
+                .birthDate(new Date())
                 .build();
     }
 
@@ -70,7 +70,11 @@ public class TestDataFactory {
         Address address2 = createAddress("73 Apple Road", "Oakland");
 
         UserAuth auth = createUserAuth();
-        UserInfo userInfo = createUserInfo();
+        UserInfo userInfo = UserInfo.builder()
+                .addresses(List.of(address1, address2))
+                .fullName(fullName)
+                .birthDate(new Date())
+                .build();
 
         BankBranch branch = createBankBranch();
         Account account1 = createAccount(branch, 1122334455);
