@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 public class User {
@@ -33,6 +34,9 @@ public class User {
     private String username;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @Column(unique = true, nullable = false, updatable = false)
+    private String uuid = UUID.randomUUID().toString();
 
     // Constructors
     protected User(){}
@@ -112,6 +116,26 @@ public class User {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public String getUuid(){
+        return uuid;
+    }
+
+    private void setUuid(String uuid){
+        this.uuid = uuid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return uuid.equals(user.uuid);
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 
     // Builder
