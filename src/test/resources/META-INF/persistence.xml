@@ -25,18 +25,19 @@
         <class>in.lokeshkaushik.expensemanager.model.expense.ExpenseCategory</class>
         <properties>
             <!-- Database connection -->
-            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:test.db"/>
-<!--            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>-->
-<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>-->
+<!--            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>-->
+<!--            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:test.db"/>-->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>
 
             <!-- Hibernate settings -->
             <!-- auto create schema and drop -->
-            <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>
+<!--            <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 <!--            <property name="hibernate.archive.autodetection" value="class"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.show_sql" value="true"/>
 
             <!-- Eclipse settings -->
