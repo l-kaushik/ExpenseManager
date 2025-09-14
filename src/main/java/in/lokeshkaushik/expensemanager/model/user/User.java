@@ -1,6 +1,7 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
 import in.lokeshkaushik.expensemanager.model.account.Account;
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class User {
+public class User implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -136,6 +137,11 @@ public class User {
     @Override
     public int hashCode() {
         return uuid.hashCode();
+    }
+
+    @Override
+    public Long getId() {
+        return userId;
     }
 
     // Builder

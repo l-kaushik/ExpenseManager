@@ -1,11 +1,12 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class ExpenseInfo {
+public class ExpenseInfo implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long expenseInfoId;
@@ -72,6 +73,11 @@ public class ExpenseInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public Long getId() {
+        return expenseInfoId;
     }
 
     // Builder

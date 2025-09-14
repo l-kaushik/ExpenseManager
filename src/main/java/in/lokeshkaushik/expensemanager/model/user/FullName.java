@@ -1,9 +1,10 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 @Entity
-public class FullName{
+public class FullName implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long fullNameId;
@@ -66,6 +67,11 @@ public class FullName{
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public Long getId() {
+        return fullNameId;
     }
 
     // Builder

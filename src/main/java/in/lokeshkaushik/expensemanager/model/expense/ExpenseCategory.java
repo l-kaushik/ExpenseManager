@@ -1,11 +1,12 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class ExpenseCategory {
+public class ExpenseCategory implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long expenseCategoryId;
@@ -49,6 +50,11 @@ public class ExpenseCategory {
 
     public void setExpenseInfos(List<ExpenseInfo> expenseInfos) {
         this.expenseInfos = expenseInfos;
+    }
+
+    @Override
+    public Long getId() {
+        return expenseCategoryId;
     }
 
     // Builder

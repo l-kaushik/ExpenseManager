@@ -1,12 +1,13 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Account {
+public class Account implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,6 +96,11 @@ public class Account {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public Long getId() {
+        return accountId;
     }
 
     // Builder

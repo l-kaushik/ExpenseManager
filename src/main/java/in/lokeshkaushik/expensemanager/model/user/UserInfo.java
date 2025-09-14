@@ -1,5 +1,7 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
+
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class UserInfo {
+public class UserInfo implements Identifiable {
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,6 +77,11 @@ public class UserInfo {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public Long getId() {
+        return userInfoId;
     }
 
     // Builder

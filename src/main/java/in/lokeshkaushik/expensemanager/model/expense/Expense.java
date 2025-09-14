@@ -1,13 +1,14 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
 import in.lokeshkaushik.expensemanager.model.account.Transaction;
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Expense {
+public class Expense implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,6 +78,11 @@ public class Expense {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public Long getId() {
+        return expenseId;
     }
 
     // Builder

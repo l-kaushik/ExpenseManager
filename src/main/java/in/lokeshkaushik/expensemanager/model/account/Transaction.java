@@ -1,5 +1,6 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
@@ -7,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-public class Transaction {
+public class Transaction implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long transactionId;
@@ -128,6 +129,11 @@ public class Transaction {
 
     public void setExpense(Expense expense) {
         this.expense = expense;
+    }
+
+    @Override
+    public Long getId() {
+        return transactionId;
     }
 
     // Builder

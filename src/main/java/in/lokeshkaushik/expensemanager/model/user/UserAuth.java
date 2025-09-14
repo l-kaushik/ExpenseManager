@@ -1,11 +1,12 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
+import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class UserAuth {
+public class UserAuth implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userAuthId;
@@ -100,6 +101,11 @@ public class UserAuth {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public Long getId() {
+        return userAuthId;
     }
 
     // Builder
