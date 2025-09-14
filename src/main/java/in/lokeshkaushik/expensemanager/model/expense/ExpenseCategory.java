@@ -18,9 +18,13 @@ public class ExpenseCategory {
 
     // TODO: add a better solution for fetching expenses list, cause collection fetch everything at once
 
-    public ExpenseCategory() {}
-    public ExpenseCategory(String name){
-        this.name = name;
+    // Constructors
+
+    protected ExpenseCategory() {}
+    private ExpenseCategory(Builder builder) {
+        setExpenseCategoryId(builder.expenseCategoryId);
+        setName(builder.name);
+        setExpenseInfos(builder.expenseInfos);
     }
 
     public long getExpenseCategoryId() {
@@ -45,5 +49,39 @@ public class ExpenseCategory {
 
     public void setExpenseInfos(List<ExpenseInfo> expenseInfos) {
         this.expenseInfos = expenseInfos;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long expenseCategoryId;
+        private String name;
+        private List<ExpenseInfo> expenseInfos;
+
+        private Builder() {
+        }
+
+        public Builder expenseCategoryId(long val) {
+            expenseCategoryId = val;
+            return this;
+        }
+
+        public Builder name(String val) {
+            name = val;
+            return this;
+        }
+
+        public Builder expenseInfos(List<ExpenseInfo> val) {
+            expenseInfos = val;
+            return this;
+        }
+
+        public ExpenseCategory build() {
+            return new ExpenseCategory(this);
+        }
     }
 }

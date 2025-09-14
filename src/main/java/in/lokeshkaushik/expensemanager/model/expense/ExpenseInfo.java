@@ -21,6 +21,19 @@ public class ExpenseInfo {
     private LocalDateTime timestamp;
     private String description;
 
+    // Constructors
+    protected ExpenseInfo(){}
+
+    private ExpenseInfo(Builder builder) {
+        setExpenseInfoId(builder.expenseInfoId);
+        setExpenseCategory(builder.expenseCategory);
+        setExpense(builder.expense);
+        setTimestamp(builder.timestamp);
+        setDescription(builder.description);
+    }
+
+    // Getter and Setter
+
     public long getExpenseInfoId() {
         return expenseInfoId;
     }
@@ -59,5 +72,51 @@ public class ExpenseInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long expenseInfoId;
+        private ExpenseCategory expenseCategory;
+        private Expense expense;
+        private LocalDateTime timestamp;
+        private String description;
+
+        private Builder() {
+        }
+
+        public Builder expenseInfoId(long val) {
+            expenseInfoId = val;
+            return this;
+        }
+
+        public Builder expenseCategory(ExpenseCategory val) {
+            expenseCategory = val;
+            return this;
+        }
+
+        public Builder expense(Expense val) {
+            expense = val;
+            return this;
+        }
+
+        public Builder timestamp(LocalDateTime val) {
+            timestamp = val;
+            return this;
+        }
+
+        public Builder description(String val) {
+            description = val;
+            return this;
+        }
+
+        public ExpenseInfo build() {
+            return new ExpenseInfo(this);
+        }
     }
 }

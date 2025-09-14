@@ -25,6 +25,20 @@ public class Expense {
 
     private LocalDateTime createdAt;
 
+    // Constructors
+
+    protected Expense() {}
+
+    private Expense(Builder builder) {
+        setExpenseId(builder.expenseId);
+        setUser(builder.user);
+        setTransaction(builder.transaction);
+        setExpenseInfo(builder.expenseInfo);
+        setCreatedAt(builder.createdAt);
+    }
+
+    // Getter and Setters
+
     public long getExpenseId() {
         return expenseId;
     }
@@ -63,5 +77,51 @@ public class Expense {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long expenseId;
+        private User user;
+        private Transaction transaction;
+        private ExpenseInfo expenseInfo;
+        private LocalDateTime createdAt;
+
+        private Builder() {
+        }
+
+        public Builder expenseId(long val) {
+            expenseId = val;
+            return this;
+        }
+
+        public Builder user(User val) {
+            user = val;
+            return this;
+        }
+
+        public Builder transaction(Transaction val) {
+            transaction = val;
+            return this;
+        }
+
+        public Builder expenseInfo(ExpenseInfo val) {
+            expenseInfo = val;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Expense build() {
+            return new Expense(this);
+        }
     }
 }
