@@ -25,7 +25,7 @@ public class UserInfo implements Identifiable {
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
-    private Date brithDate;
+    private Date birthDate;
 
     // Constructors
 
@@ -36,7 +36,7 @@ public class UserInfo implements Identifiable {
         setUser(builder.user);
         setFullName(builder.fullName);
         setAddresses(builder.addresses);
-        setBrithDate(builder.brithDate);
+        setBirthDate(builder.birthDate);
     }
 
     public long getUserInfoId() {
@@ -63,12 +63,12 @@ public class UserInfo implements Identifiable {
         this.addresses = addresses;
     }
 
-    public Date getBrithDate() {
-        return brithDate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBrithDate(Date brithDate) {
-        this.brithDate = brithDate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public User getUser() {
@@ -95,7 +95,7 @@ public class UserInfo implements Identifiable {
         private User user;
         private FullName fullName;
         private List<Address> addresses;
-        private Date brithDate;
+        private Date birthDate;
 
         private Builder() {
         }
@@ -120,8 +120,8 @@ public class UserInfo implements Identifiable {
             return this;
         }
 
-        public Builder brithDate(Date val) {
-            brithDate = val;
+        public Builder birthDate(Date val) {
+            birthDate = val;
             return this;
         }
 
