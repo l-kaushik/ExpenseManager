@@ -18,7 +18,7 @@ public class UserInfo {
     private User user;
 
     @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private FullName fullNameId;
+    private FullName fullName;
 
     @OneToMany(mappedBy = "userInfo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
@@ -32,7 +32,7 @@ public class UserInfo {
     private UserInfo(Builder builder) {
         setUserInfoId(builder.userInfoId);
         setUser(builder.user);
-        setFullNameId(builder.fullNameId);
+        setFullName(builder.fullName);
         setAddresses(builder.addresses);
         setBrithDate(builder.brithDate);
     }
@@ -49,12 +49,12 @@ public class UserInfo {
         this.userInfoId = userInfoId;
     }
 
-    public FullName getFullNameId() {
-        return fullNameId;
+    public FullName getFullName() {
+        return fullName;
     }
 
-    public void setFullNameId(FullName fullNameId) {
-        this.fullNameId = fullNameId;
+    public void setFullName(FullName fullName) {
+        this.fullName = fullName;
     }
 
     public void setAddresses(List<Address> addresses) {
@@ -86,7 +86,7 @@ public class UserInfo {
     public static final class Builder {
         private long userInfoId;
         private User user;
-        private FullName fullNameId;
+        private FullName fullName;
         private List<Address> addresses;
         private Date brithDate;
 
@@ -103,8 +103,8 @@ public class UserInfo {
             return this;
         }
 
-        public Builder fullNameId(FullName val) {
-            fullNameId = val;
+        public Builder fullName(FullName val) {
+            this.fullName = val;
             return this;
         }
 
