@@ -7,11 +7,22 @@
 
     <persistence-unit name="test-persistence" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!--        <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
 <!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 
+        <class>in.lokeshkaushik.expensemanager.model.user.User</class>
         <class>in.lokeshkaushik.expensemanager.model.user.UserInfo</class>
+        <class>in.lokeshkaushik.expensemanager.model.user.UserAuth</class>
         <class>in.lokeshkaushik.expensemanager.model.user.FullName</class>
         <class>in.lokeshkaushik.expensemanager.model.user.Address</class>
+
+        <class>in.lokeshkaushik.expensemanager.model.account.Account</class>
+        <class>in.lokeshkaushik.expensemanager.model.account.Transaction</class>
+        <class>in.lokeshkaushik.expensemanager.model.account.BankBranch</class>
+
+        <class>in.lokeshkaushik.expensemanager.model.expense.Expense</class>
+        <class>in.lokeshkaushik.expensemanager.model.expense.ExpenseInfo</class>
+        <class>in.lokeshkaushik.expensemanager.model.expense.ExpenseCategory</class>
         <properties>
             <!-- Database connection -->
             <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
@@ -24,6 +35,7 @@
             <!-- Hibernate settings -->
             <!-- auto create schema and drop -->
             <property name="hibernate.dialect" value="org.hibernate.community.dialect.SQLiteDialect"/>
+<!--            <property name="hibernate.archive.autodetection" value="class"/>-->
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
 
