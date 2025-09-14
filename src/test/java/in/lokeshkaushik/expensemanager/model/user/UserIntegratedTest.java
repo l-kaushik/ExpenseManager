@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserIntegratedTest extends BaseJpaTest {
+public class UserIntegratedTest extends BaseJpaTest {
 
     @Test
     void testPersistAndFindUser() {
@@ -49,7 +49,7 @@ class UserIntegratedTest extends BaseJpaTest {
         UserInfo userInfo = UserInfo.builder()
                 .fullName(fullName)
                 .addresses(List.of(address1, address2))
-                .brithDate(new Date(1757836172))
+                .birthDate(new Date(1757836172))
                 .build();
 
         BankBranch bankBranch = BankBranch.builder()
@@ -90,14 +90,7 @@ class UserIntegratedTest extends BaseJpaTest {
         account2.setUser(user);
         userInfo.setUser(user);
 
-        entityTransaction.begin();
-        entityManager.persist(bankBranch);
-        entityManager.persist(user);
-        entityTransaction.commit();
-
-        entityManager.clear(); // clear cache so we fetch from DB
-
-        User found = entityManager.find(User.class, user.getUserId());
+        User found = PersistAndFetch(User.class, user);
 
         assertNotNull(found);
         assertEquals(user, found);
