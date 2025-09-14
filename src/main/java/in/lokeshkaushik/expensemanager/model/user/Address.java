@@ -17,6 +17,20 @@ public class Address{
     private String state;
     private String zipCode;
 
+    // Constructors
+    protected Address(){}
+
+    private Address(Builder builder) {
+        setAddressId(builder.addressId);
+        setUserInfo(builder.userInfo);
+        setStreet(builder.street);
+        setCity(builder.city);
+        setState(builder.state);
+        setZipCode(builder.zipCode);
+    }
+
+    // getters and setters
+
     public long getAddressId() {
         return addressId;
     }
@@ -64,4 +78,57 @@ public class Address{
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long addressId;
+        private UserInfo userInfo;
+        private String street;
+        private String city;
+        private String state;
+        private String zipCode;
+
+        private Builder() {
+        }
+
+        public Builder addressId(long val) {
+            addressId = val;
+            return this;
+        }
+
+        public Builder userInfo(UserInfo val) {
+            userInfo = val;
+            return this;
+        }
+
+        public Builder street(String val) {
+            street = val;
+            return this;
+        }
+
+        public Builder city(String val) {
+            city = val;
+            return this;
+        }
+
+        public Builder state(String val) {
+            state = val;
+            return this;
+        }
+
+        public Builder zipCode(String val) {
+            zipCode = val;
+            return this;
+        }
+
+        public Address build() {
+            return new Address(this);
+        }
+    }
+
 }

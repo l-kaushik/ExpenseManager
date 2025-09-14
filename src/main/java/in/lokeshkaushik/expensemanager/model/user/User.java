@@ -18,7 +18,6 @@ public class User {
     // since removing 1 account will mess up entries for others as well.
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(nullable = false)
     private UserAuth userAuth;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -35,45 +34,21 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // Default Constructor
+    // Constructors
     protected User(){}
 
-    // Builder
-    public static class Builder {
-        private final User user;
-
-        public Builder() {
-            this.user = new User();
-        }
-
-        public Builder username(String username){
-            user.setUsername(username);
-            return this;
-        }
-
-        public  Builder userAuth(UserAuth userAuth) {
-            user.setUserAuth(userAuth);
-            return this;
-        }
-
-        public Builder userInfo(UserInfo userInfo){
-            user.setUserInfo(userInfo);
-            return this;
-        }
-
-        public User build(){
-            user.setCreatedAt(LocalDateTime.now());
-            user.setUpdatedAt(LocalDateTime.now());
-            return user;
-        }
-
+    private User(Builder builder) {
+        setUserId(builder.userId);
+        setUserAuth(builder.userAuth);
+        setAccounts(builder.accounts);
+        setUserInfo(builder.userInfo);
+        setExpenses(builder.expenses);
+        setUsername(builder.username);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
     }
 
     // Getters and Setters
-
-    public static Builder builder() {
-        return new Builder();
-    }
 
     public long getUserId() {
         return userId;
@@ -137,5 +112,69 @@ public class User {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long userId;
+        private UserAuth userAuth;
+        private List<Account> accounts;
+        private UserInfo userInfo;
+        private List<Expense> expenses;
+        private String username;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+
+        private Builder() {
+        }
+
+        public Builder userId(long val) {
+            userId = val;
+            return this;
+        }
+
+        public Builder userAuth(UserAuth val) {
+            userAuth = val;
+            return this;
+        }
+
+        public Builder accounts(List<Account> val) {
+            accounts = val;
+            return this;
+        }
+
+        public Builder userInfo(UserInfo val) {
+            userInfo = val;
+            return this;
+        }
+
+        public Builder expenses(List<Expense> val) {
+            expenses = val;
+            return this;
+        }
+
+        public Builder username(String val) {
+            username = val;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(LocalDateTime val) {
+            updatedAt = val;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }

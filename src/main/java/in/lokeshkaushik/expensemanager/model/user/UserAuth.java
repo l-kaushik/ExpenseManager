@@ -23,6 +23,21 @@ public class UserAuth {
     private LocalDateTime lastLogin;
     private LocalDateTime updatedAt;
 
+    // Constructors
+
+    protected UserAuth() {}
+
+    private UserAuth(Builder builder) {
+        setUserAuthId(builder.userAuthId);
+        setUser(builder.user);
+        setPasswordHash(builder.passwordHash);
+        setSalt(builder.salt);
+        setEmail(builder.email);
+        setCreatedAt(builder.createdAt);
+        setLastLogin(builder.lastLogin);
+        setUpdatedAt(builder.updatedAt);
+    }
+
     public long getUserAuthId() {
         return userAuthId;
     }
@@ -85,5 +100,69 @@ public class UserAuth {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long userAuthId;
+        private User user;
+        private String passwordHash;
+        private String salt;
+        private String email;
+        private LocalDateTime createdAt;
+        private LocalDateTime lastLogin;
+        private LocalDateTime updatedAt;
+
+        private Builder() {
+        }
+
+        public Builder userAuthId(long val) {
+            userAuthId = val;
+            return this;
+        }
+
+        public Builder user(User val) {
+            user = val;
+            return this;
+        }
+
+        public Builder passwordHash(String val) {
+            passwordHash = val;
+            return this;
+        }
+
+        public Builder salt(String val) {
+            salt = val;
+            return this;
+        }
+
+        public Builder email(String val) {
+            email = val;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder lastLogin(LocalDateTime val) {
+            lastLogin = val;
+            return this;
+        }
+
+        public Builder updatedAt(LocalDateTime val) {
+            updatedAt = val;
+            return this;
+        }
+
+        public UserAuth build() {
+            return new UserAuth(this);
+        }
     }
 }
