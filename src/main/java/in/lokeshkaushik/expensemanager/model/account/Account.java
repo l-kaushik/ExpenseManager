@@ -24,6 +24,19 @@ public class Account {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    // Constructors
+
+    protected Account() {}
+
+    private Account(Builder builder) {
+        setAccountId(builder.accountId);
+        setUser(builder.user);
+        setBankBranch(builder.bankBranch);
+        setAccountNumber(builder.accountNumber);
+        setCreatedAt(builder.createdAt);
+        setUpdatedAt(builder.updatedAt);
+    }
+
     /*
     NOTE: No bi-directional mapping to transaction,
     cuz transaction can scale up to huge numbers and collection cause them loading all at once
@@ -33,6 +46,8 @@ public class Account {
      */
 
     // TODO: bank balance will be calculated from transaction history, but add a way to setup initial amount
+
+    // Getters and Setters
 
     public long getAccountId() {
         return accountId;
@@ -80,5 +95,57 @@ public class Account {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long accountId;
+        private User user;
+        private BankBranch bankBranch;
+        private long accountNumber;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
+
+        private Builder() {
+        }
+
+        public Builder accountId(long val) {
+            accountId = val;
+            return this;
+        }
+
+        public Builder user(User val) {
+            user = val;
+            return this;
+        }
+
+        public Builder bankBranch(BankBranch val) {
+            bankBranch = val;
+            return this;
+        }
+
+        public Builder accountNumber(long val) {
+            accountNumber = val;
+            return this;
+        }
+
+        public Builder createdAt(LocalDateTime val) {
+            createdAt = val;
+            return this;
+        }
+
+        public Builder updatedAt(LocalDateTime val) {
+            updatedAt = val;
+            return this;
+        }
+
+        public Account build() {
+            return new Account(this);
+        }
     }
 }

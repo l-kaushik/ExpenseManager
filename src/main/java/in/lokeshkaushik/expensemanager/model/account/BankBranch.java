@@ -16,7 +16,22 @@ public class BankBranch {
     private String IFSCCode;
     private String branchCode;
     private String branchName;
+
+    // Constructors
+
+    protected BankBranch() {}
+
+    private BankBranch(Builder builder) {
+        setBranchId(builder.branchId);
+        setAccounts(builder.accounts);
+        setIFSCCode(builder.IFSCCode);
+        setBranchCode(builder.branchCode);
+        setBranchName(builder.branchName);
+    }
+
     // can add Address field for this branch, but I don't think there is need for it right now
+
+    // Getters and Setters
 
     public long getBranchId() {
         return branchId;
@@ -56,5 +71,51 @@ public class BankBranch {
 
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
+    }
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private long branchId;
+        private List<Account> accounts;
+        private String IFSCCode;
+        private String branchCode;
+        private String branchName;
+
+        private Builder() {
+        }
+
+        public Builder branchId(long val) {
+            branchId = val;
+            return this;
+        }
+
+        public Builder accounts(List<Account> val) {
+            accounts = val;
+            return this;
+        }
+
+        public Builder IFSCCode(String val) {
+            IFSCCode = val;
+            return this;
+        }
+
+        public Builder branchCode(String val) {
+            branchCode = val;
+            return this;
+        }
+
+        public Builder branchName(String val) {
+            branchName = val;
+            return this;
+        }
+
+        public BankBranch build() {
+            return new BankBranch(this);
+        }
     }
 }
