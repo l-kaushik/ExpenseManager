@@ -1,17 +1,17 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
 import in.lokeshkaushik.expensemanager.model.account.Account;
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")  // avoid reserved keyword
-public class User implements Identifiable {
+public class User extends BaseEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -34,8 +34,6 @@ public class User implements Identifiable {
     private List<Expense> expenses;
 
     private String username;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     @Column(unique = true, nullable = false, updatable = false)
     private String uuid = UUID.randomUUID().toString();
@@ -50,8 +48,6 @@ public class User implements Identifiable {
         setUserInfo(builder.userInfo);
         setExpenses(builder.expenses);
         setUsername(builder.username);
-        setCreatedAt(builder.createdAt);
-        setUpdatedAt(builder.updatedAt);
     }
 
     // Getters and Setters
@@ -70,22 +66,6 @@ public class User implements Identifiable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public UserAuth getUserAuth() {
@@ -158,8 +138,6 @@ public class User implements Identifiable {
         private UserInfo userInfo;
         private List<Expense> expenses;
         private String username;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
 
         private Builder() {
         }
@@ -191,16 +169,6 @@ public class User implements Identifiable {
 
         public Builder username(String val) {
             username = val;
-            return this;
-        }
-
-        public Builder createdAt(LocalDateTime val) {
-            createdAt = val;
-            return this;
-        }
-
-        public Builder updatedAt(LocalDateTime val) {
-            updatedAt = val;
             return this;
         }
 
