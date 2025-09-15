@@ -77,8 +77,6 @@ public class UserIntegratedTest extends BaseJpaTest {
                 .userAuth(auth)
                 .userInfo(userInfo)
                 .accounts(List.of(account1, account2))
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         fullName.setUserInfo(userInfo);

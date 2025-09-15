@@ -85,8 +85,6 @@ public class TestDataFactory {
                 .userAuth(auth)
                 .userInfo(userInfo)
                 .accounts(List.of(account1, account2))
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         // link both sides
