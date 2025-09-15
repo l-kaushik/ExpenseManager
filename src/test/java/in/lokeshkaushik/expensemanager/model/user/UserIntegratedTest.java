@@ -42,8 +42,6 @@ public class UserIntegratedTest extends BaseJpaTest {
                 .passwordHash("asfl2kneorinfosknosi39")
                 .email("example@email.com")
                 .salt("djsfoiej@#$9df469sdfsod")
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         UserInfo userInfo = UserInfo.builder()
@@ -61,15 +59,11 @@ public class UserIntegratedTest extends BaseJpaTest {
         Account account1 = Account.builder()
                 .accountNumber(1122334455)
                 .bankBranch(bankBranch)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         Account account2 = Account.builder()
                 .accountNumber(1234123412)
                 .bankBranch(bankBranch)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         User user = User.builder()

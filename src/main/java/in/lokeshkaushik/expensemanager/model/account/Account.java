@@ -1,13 +1,12 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
-public class Account implements Identifiable {
+public class Account extends BaseEntity implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +21,6 @@ public class Account implements Identifiable {
     private BankBranch bankBranch;
 
     private long accountNumber;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     // Constructors
 
@@ -34,8 +31,6 @@ public class Account implements Identifiable {
         setUser(builder.user);
         setBankBranch(builder.bankBranch);
         setAccountNumber(builder.accountNumber);
-        setCreatedAt(builder.createdAt);
-        setUpdatedAt(builder.updatedAt);
     }
 
     /*
@@ -74,22 +69,6 @@ public class Account implements Identifiable {
         this.accountNumber = accountNumber;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public User getUser() {
         return user;
     }
@@ -114,8 +93,6 @@ public class Account implements Identifiable {
         private User user;
         private BankBranch bankBranch;
         private long accountNumber;
-        private LocalDateTime createdAt;
-        private LocalDateTime updatedAt;
 
         private Builder() {
         }
@@ -137,16 +114,6 @@ public class Account implements Identifiable {
 
         public Builder accountNumber(long val) {
             accountNumber = val;
-            return this;
-        }
-
-        public Builder createdAt(LocalDateTime val) {
-            createdAt = val;
-            return this;
-        }
-
-        public Builder updatedAt(LocalDateTime val) {
-            updatedAt = val;
             return this;
         }
 

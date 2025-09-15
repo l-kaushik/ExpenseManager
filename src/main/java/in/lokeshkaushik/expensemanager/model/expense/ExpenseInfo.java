@@ -1,12 +1,11 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
-public class ExpenseInfo implements Identifiable {
+public class ExpenseInfo extends BaseEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long expenseInfoId;
@@ -19,7 +18,6 @@ public class ExpenseInfo implements Identifiable {
     @JoinColumn(name = "expense_id", nullable = false)
     private Expense expense;
 
-    private LocalDateTime timestamp;
     private String description;
 
     // Constructors
@@ -29,7 +27,6 @@ public class ExpenseInfo implements Identifiable {
         setExpenseInfoId(builder.expenseInfoId);
         setExpenseCategory(builder.expenseCategory);
         setExpense(builder.expense);
-        setTimestamp(builder.timestamp);
         setDescription(builder.description);
     }
 
@@ -59,14 +56,6 @@ public class ExpenseInfo implements Identifiable {
         this.expense = expense;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -90,7 +79,6 @@ public class ExpenseInfo implements Identifiable {
         private long expenseInfoId;
         private ExpenseCategory expenseCategory;
         private Expense expense;
-        private LocalDateTime timestamp;
         private String description;
 
         private Builder() {
@@ -108,11 +96,6 @@ public class ExpenseInfo implements Identifiable {
 
         public Builder expense(Expense val) {
             expense = val;
-            return this;
-        }
-
-        public Builder timestamp(LocalDateTime val) {
-            timestamp = val;
             return this;
         }
 

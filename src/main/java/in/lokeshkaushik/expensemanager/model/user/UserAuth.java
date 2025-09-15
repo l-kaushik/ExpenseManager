@@ -1,12 +1,13 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
-public class UserAuth implements Identifiable {
+public class UserAuth extends BaseEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userAuthId;
@@ -20,9 +21,7 @@ public class UserAuth implements Identifiable {
     private String salt;
 
     private String email;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastLogin;
-    private LocalDateTime updatedAt;
+    private Instant lastLogin;
 
     // Constructors
 
@@ -34,9 +33,7 @@ public class UserAuth implements Identifiable {
         setPasswordHash(builder.passwordHash);
         setSalt(builder.salt);
         setEmail(builder.email);
-        setCreatedAt(builder.createdAt);
         setLastLogin(builder.lastLogin);
-        setUpdatedAt(builder.updatedAt);
     }
 
     public long getUserAuthId() {
@@ -79,28 +76,12 @@ public class UserAuth implements Identifiable {
         this.email = email;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getLastLogin() {
+    public Instant getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(LocalDateTime lastLogin) {
+    public void setLastLogin(Instant lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     @Override
@@ -120,9 +101,7 @@ public class UserAuth implements Identifiable {
         private String passwordHash;
         private String salt;
         private String email;
-        private LocalDateTime createdAt;
-        private LocalDateTime lastLogin;
-        private LocalDateTime updatedAt;
+        private Instant lastLogin;
 
         private Builder() {
         }
@@ -152,18 +131,9 @@ public class UserAuth implements Identifiable {
             return this;
         }
 
-        public Builder createdAt(LocalDateTime val) {
-            createdAt = val;
-            return this;
-        }
 
-        public Builder lastLogin(LocalDateTime val) {
+        public Builder lastLogin(Instant val) {
             lastLogin = val;
-            return this;
-        }
-
-        public Builder updatedAt(LocalDateTime val) {
-            updatedAt = val;
             return this;
         }
 

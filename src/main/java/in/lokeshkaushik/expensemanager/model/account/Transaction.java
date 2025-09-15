@@ -1,14 +1,14 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
-public class Transaction implements Identifiable {
+public class Transaction extends BaseEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long transactionId;
@@ -28,7 +28,6 @@ public class Transaction implements Identifiable {
     private TransactionType transactionType;
     private PaymentStatus paymentStatus;
     private PaymentMethod paymentMethod;
-    private LocalDateTime timestamp;
     private String remark;
     private BigDecimal amount;
 
@@ -44,7 +43,6 @@ public class Transaction implements Identifiable {
         setTransactionType(builder.transactionType);
         setPaymentStatus(builder.paymentStatus);
         setPaymentMethod(builder.paymentMethod);
-        setTimestamp(builder.timestamp);
         setRemark(builder.remark);
         setAmount(builder.amount);
     }
@@ -81,14 +79,6 @@ public class Transaction implements Identifiable {
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getRemark() {
@@ -150,7 +140,6 @@ public class Transaction implements Identifiable {
         private TransactionType transactionType;
         private PaymentStatus paymentStatus;
         private PaymentMethod paymentMethod;
-        private LocalDateTime timestamp;
         private String remark;
         private BigDecimal amount;
 
@@ -189,11 +178,6 @@ public class Transaction implements Identifiable {
 
         public Builder paymentMethod(PaymentMethod val) {
             paymentMethod = val;
-            return this;
-        }
-
-        public Builder timestamp(LocalDateTime val) {
-            timestamp = val;
             return this;
         }
 

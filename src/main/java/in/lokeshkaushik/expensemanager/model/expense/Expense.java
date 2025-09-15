@@ -1,14 +1,13 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
 import in.lokeshkaushik.expensemanager.model.account.Transaction;
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
-public class Expense implements Identifiable {
+public class Expense extends BaseEntity implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +23,6 @@ public class Expense implements Identifiable {
     @OneToOne(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true)
     private ExpenseInfo expenseInfo;
 
-    private LocalDateTime createdAt;
-
     // Constructors
 
     protected Expense() {}
@@ -35,7 +32,6 @@ public class Expense implements Identifiable {
         setUser(builder.user);
         setTransaction(builder.transaction);
         setExpenseInfo(builder.expenseInfo);
-        setCreatedAt(builder.createdAt);
     }
 
     // Getter and Setters
@@ -72,14 +68,6 @@ public class Expense implements Identifiable {
         this.expenseInfo = expenseInfo;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     @Override
     public Long getId() {
         return expenseId;
@@ -96,7 +84,6 @@ public class Expense implements Identifiable {
         private User user;
         private Transaction transaction;
         private ExpenseInfo expenseInfo;
-        private LocalDateTime createdAt;
 
         private Builder() {
         }
@@ -118,11 +105,6 @@ public class Expense implements Identifiable {
 
         public Builder expenseInfo(ExpenseInfo val) {
             expenseInfo = val;
-            return this;
-        }
-
-        public Builder createdAt(LocalDateTime val) {
-            createdAt = val;
             return this;
         }
 

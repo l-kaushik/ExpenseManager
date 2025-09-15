@@ -33,8 +33,6 @@ public class TestDataFactory {
                 .passwordHash("hash123")
                 .email("example@email.com")
                 .salt("salt456")
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -50,8 +48,6 @@ public class TestDataFactory {
         return Account.builder()
                 .accountNumber(number)
                 .bankBranch(bankBranch)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
