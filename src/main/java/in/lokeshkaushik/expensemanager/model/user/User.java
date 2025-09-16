@@ -1,7 +1,8 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
 import in.lokeshkaushik.expensemanager.model.account.Account;
-import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
+import in.lokeshkaushik.expensemanager.model.base.AuditListener;
+import in.lokeshkaushik.expensemanager.model.base.AuditableEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
@@ -10,7 +11,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")  // avoid reserved keyword
-public class User extends BaseEntity implements Identifiable {
+@EntityListeners(AuditListener.class)
+public class User extends AuditableEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
