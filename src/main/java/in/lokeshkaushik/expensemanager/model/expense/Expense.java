@@ -1,13 +1,15 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
 import in.lokeshkaushik.expensemanager.model.account.Transaction;
-import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
+import in.lokeshkaushik.expensemanager.model.base.AuditListener;
+import in.lokeshkaushik.expensemanager.model.base.AuditableEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.user.User;
 import jakarta.persistence.*;
 
 @Entity
-public class Expense extends BaseEntity implements Identifiable {
+@EntityListeners(AuditListener.class)
+public class Expense extends AuditableEntity implements Identifiable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

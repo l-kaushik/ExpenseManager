@@ -1,6 +1,7 @@
 package in.lokeshkaushik.expensemanager.model.account;
 
-import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
+import in.lokeshkaushik.expensemanager.model.base.AuditListener;
+import in.lokeshkaushik.expensemanager.model.base.AuditableEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
@@ -8,7 +9,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class Transaction extends BaseEntity implements Identifiable {
+@EntityListeners(AuditListener.class)
+public class Transaction extends AuditableEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long transactionId;

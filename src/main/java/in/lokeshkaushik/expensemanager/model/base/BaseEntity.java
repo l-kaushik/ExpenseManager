@@ -6,7 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 import java.util.UUID;
 
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @Column(unique = true, nullable = false, updatable = false)
     private final String uuid = UUID.randomUUID().toString();

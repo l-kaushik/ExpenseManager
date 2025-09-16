@@ -1,13 +1,15 @@
 package in.lokeshkaushik.expensemanager.model.user;
 
-import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
+import in.lokeshkaushik.expensemanager.model.base.AuditListener;
+import in.lokeshkaushik.expensemanager.model.base.AuditableEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
-public class UserAuth extends BaseEntity implements Identifiable {
+@EntityListeners(AuditListener.class)
+public class UserAuth extends AuditableEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userAuthId;
