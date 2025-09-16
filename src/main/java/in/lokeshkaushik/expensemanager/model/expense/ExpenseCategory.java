@@ -1,12 +1,13 @@
 package in.lokeshkaushik.expensemanager.model.expense;
 
+import in.lokeshkaushik.expensemanager.model.base.BaseEntity;
 import in.lokeshkaushik.expensemanager.model.base.Identifiable;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-public class ExpenseCategory implements Identifiable {
+public class ExpenseCategory extends BaseEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long expenseCategoryId;

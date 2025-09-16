@@ -7,7 +7,6 @@ import in.lokeshkaushik.expensemanager.model.expense.Expense;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")  // avoid reserved keyword
@@ -34,9 +33,6 @@ public class User extends BaseEntity implements Identifiable {
     private List<Expense> expenses;
 
     private String username;
-
-    @Column(unique = true, nullable = false, updatable = false)
-    private String uuid = UUID.randomUUID().toString();
 
     // Constructors
     protected User(){}
@@ -98,26 +94,6 @@ public class User extends BaseEntity implements Identifiable {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
-    }
-
-    public String getUuid(){
-        return uuid;
-    }
-
-    private void setUuid(String uuid){
-        this.uuid = uuid;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return uuid.equals(user.uuid);
-    }
-
-    @Override
-    public int hashCode() {
-        return uuid.hashCode();
     }
 
     @Override
