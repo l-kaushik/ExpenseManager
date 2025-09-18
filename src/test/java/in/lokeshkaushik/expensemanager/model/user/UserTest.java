@@ -2,12 +2,14 @@ package in.lokeshkaushik.expensemanager.model.user;
 
 import in.lokeshkaushik.expensemanager.model.account.Account;
 import in.lokeshkaushik.expensemanager.model.account.BankBranch;
+import in.lokeshkaushik.expensemanager.model.account.Transaction;
+import in.lokeshkaushik.expensemanager.model.expense.Expense;
+import in.lokeshkaushik.expensemanager.model.expense.ExpenseCategory;
+import in.lokeshkaushik.expensemanager.model.expense.ExpenseInfo;
 import in.lokeshkaushik.expensemanager.utils.BaseJpaTest;
 import in.lokeshkaushik.expensemanager.utils.TestDataFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.suite.api.BeforeSuite;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -22,6 +24,7 @@ public class UserTest extends BaseJpaTest {
     @BeforeEach
     void setUp() {
         user = TestDataFactory.createUser();
+        PersistAndFetch(ExpenseCategory.class, user.getExpenses().get(0).getExpenseInfo().getExpenseCategory());
         found = PersistAndFetch(User.class, user);
     }
 
@@ -152,4 +155,58 @@ public class UserTest extends BaseJpaTest {
             assertEquals(bankBranch.getAccounts().size(), foundBankBranch.getAccounts().size(), "Accounts list size should match");
         }
     }
+
+    @Test
+    void testExpenseWithTransactionAndInfo() {
+
+        List<Expense> expenses = user.getExpenses();
+        List<Expense> foundExpenses = found.getExpenses();
+
+        assertNotNull(expenses, "User expenses should not be null");
+        assertNotNull(foundExpenses, "Found expenses should not be null");
+        assertEquals(expenses.size(), foundExpenses.size(), "Expense list sizes should match");
+
+        for (int i = 0; i < expenses.size(); i++) {
+            Expense expense = expenses.get(i);
+            Expense foundExpense = foundExpenses.get(i);
+
+            assertNotNull(expense, "Expense at index " + i + " should not be null");
+            assertNotNull(foundExpense, "Found expense at index " + i + " should not be null");
+            assertEquals(expense.getUser(), foundExpense.getUser(),
+                    "Users should match for expense at index " + i);
+
+            // Transaction checks
+            Transaction tx = expense.getTransaction();
+            Transaction foundTx = foundExpense.getTransaction();
+
+            assertNotNull(tx, "Transaction should not be null for expense at index " + i);
+            assertNotNull(foundTx, "Found transaction should not be null for expense at index " + i);
+            assertEquals(tx.getAmount().doubleValue(), foundTx.getAmount().doubleValue(),
+                    "Transaction amount should match for expense at index " + i);
+            assertEquals(tx.getRemark(), foundTx.getRemark(),
+                    "Transaction remark should match for expense at index " + i);
+            assertEquals(tx.getTransactionType(), foundTx.getTransactionType(),
+                    "Transaction type should match for expense at index " + i);
+            assertEquals(tx.getPaymentStatus(), foundTx.getPaymentStatus(),
+                    "Payment status should match for expense at index " + i);
+            assertEquals(tx.getPaymentMethod(), foundTx.getPaymentMethod(),
+                    "Payment method should match for expense at index " + i);
+            assertEquals(tx.getSenderAccount(), foundTx.getSenderAccount(),
+                    "Sender account should match for expense at index " + i);
+            assertEquals(tx.getReceiverAccount(), foundTx.getReceiverAccount(),
+                    "Receiver account should match for expense at index " + i);
+
+            // ExpenseInfo checks
+            ExpenseInfo info = expense.getExpenseInfo();
+            ExpenseInfo foundInfo = foundExpense.getExpenseInfo();
+
+            assertNotNull(info, "ExpenseInfo should not be null for expense at index " + i);
+            assertNotNull(foundInfo, "Found ExpenseInfo should not be null for expense at index " + i);
+            assertEquals(info.getDescription(), foundInfo.getDescription(),
+                    "Expense description should match for expense at index " + i);
+            assertEquals(info.getExpenseCategory(), foundInfo.getExpenseCategory(),
+                    "Expense category should match for expense at index " + i);
+        }
+    }
+
 }

@@ -31,7 +31,7 @@ public class User extends AuditableEntity implements Identifiable {
     private UserInfo userInfo;
 
     // TODO: add cascading and orphan removal in service layer
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Expense> expenses;
 
     private String username;

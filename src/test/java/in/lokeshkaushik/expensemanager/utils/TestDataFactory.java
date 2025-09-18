@@ -5,7 +5,8 @@ import in.lokeshkaushik.expensemanager.model.user.*;
 import in.lokeshkaushik.expensemanager.model.account.*;
 import in.lokeshkaushik.expensemanager.model.expense.*;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +61,48 @@ public class TestDataFactory {
                 .build();
     }
 
+    public static List<Expense> createExpenses(Account sender, Account receiver, User user, ExpenseCategory category) {
+        List<Expense> expenses = new ArrayList<>();
+        List<ExpenseInfo> expenseInfos = new ArrayList<>();
+
+        // Example expenses
+        for (int i = 1; i <= 5; i++) {
+            // Create Expense first
+            Expense expense = Expense.builder()
+                    .user(user)
+                    .build();
+
+            // Create Transaction linked to expense
+            Transaction transaction = Transaction.builder()
+                    .senderAccount(sender)
+                    .receiverAccount(receiver)
+                    .expense(expense) // link transaction -> expense
+                    .transactionType(TransactionType.CREDIT)
+                    .paymentStatus(PaymentStatus.SUCCESS)
+                    .paymentMethod(PaymentMethod.UPI)
+                    .remark("Test transaction " + i)
+                    .amount(BigDecimal.valueOf(100 * i))
+                    .build();
+
+            // Create ExpenseInfo linked to expense
+            ExpenseInfo expenseInfo = ExpenseInfo.builder()
+                    .expense(expense)
+                    .expenseCategory(category)
+                    .description("Test expense info " + i)
+                    .build();
+
+            // Wire back relations
+            expense.setTransaction(transaction);
+            expense.setExpenseInfo(expenseInfo);
+            expenseInfos.add(expenseInfo);
+
+            expenses.add(expense);
+        }
+        category.setExpenseInfos(expenseInfos);
+
+        return expenses;
+    }
+
     public static User createUser() {
         FullName fullName = createFullName();
         Address address1 = createAddress("456 Elm Street", "Los Angeles");
@@ -83,6 +126,10 @@ public class TestDataFactory {
                 .accounts(List.of(account1, account2))
                 .build();
 
+        ExpenseCategory expenseCategory = ExpenseCategory.builder().name("test").build();
+
+        List<Expense> expenses = createExpenses(account1, account2, user, expenseCategory);
+
         // link both sides
         fullName.setUserInfo(userInfo);
         address1.setUserInfo(userInfo);
@@ -92,6 +139,7 @@ public class TestDataFactory {
         account1.setUser(user);
         account2.setUser(user);
         userInfo.setUser(user);
+        user.setExpenses(expenses);
 
         return user;
     }

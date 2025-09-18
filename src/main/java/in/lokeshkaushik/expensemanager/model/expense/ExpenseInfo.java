@@ -11,7 +11,7 @@ public class ExpenseInfo extends BaseEntity implements Identifiable {
     private long expenseInfoId;
 
     @ManyToOne
-    @JoinColumn(name = "expense_category_id", nullable = false)
+    @JoinColumn(name = "expense_category_id", nullable = true)
     private ExpenseCategory expenseCategory;
 
     @OneToOne
