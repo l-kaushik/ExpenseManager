@@ -16,6 +16,7 @@ public class DashboardController extends HttpServlet {
 
         // verify is already log in, has a session data else send back to login page
         if(session == null || !session.getAttribute("login-key").equals("valid")){
+            System.out.println("dashboard: redirecting to login");
             response.sendRedirect("/login");
             return;
         }
