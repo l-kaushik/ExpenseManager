@@ -13,15 +13,10 @@ import java.io.PrintWriter;
 @WebServlet("/dashboard")
 public class DashboardController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        HttpSession session = request.getSession(false); // do not create new session if missing
+
         String page = request.getParameter("page");
-        // verify is already log in, has a session data else send back to login page
-        if(session == null || !session.getAttribute("login-key").equals("valid")){
-            System.out.println("dashboard: redirecting to login");
-            response.sendRedirect("/login");
-            return;
-        }
-        else if(page == null || page.isEmpty()){
+
+        if(page == null || page.isEmpty()){
             request.getRequestDispatcher("WEB-INF/views/dashboard.jsp").forward(request,response);
             return;
         }
